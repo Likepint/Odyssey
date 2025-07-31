@@ -14,10 +14,10 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void NotifyControllerChanged() override;
-
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 protected:
+	virtual void Init();
+
 	virtual void BeginPlay() override;
 };
