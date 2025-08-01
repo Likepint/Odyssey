@@ -22,10 +22,15 @@ public:
 	// 캐릭터가 호출할 입력 바인딩 함수
 	void SetupPlayerInput(UEnhancedInputComponent* PlayerInputComponent);
 
+	bool WantsToStop() const { return bWantsToStop; }
+	float GetSpeedAtStop() const { return SpeedAtStop; }
+
+	void CheckStopSpeed();
+
 protected:
 	virtual void BeginPlay() override;
-	
-private:	
+
+private:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> IA_Movement;
 
@@ -34,6 +39,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> IA_Crouch;
+
+	bool bWantsToStop = false;
+	float SpeedAtStop = 0.0f;
 
 	void OnMovement(const FInputActionValue& InValue);
 	void OnLook(const FInputActionValue& InValue);

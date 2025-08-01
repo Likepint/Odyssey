@@ -21,5 +21,11 @@ protected:
 	TObjectPtr<ACCharacterBase> OwnerCharacter;
 
 	UPROPERTY(BlueprintReadOnly)
+	float Speed = 0.0f;
+
+	UPROPERTY(BlueprintReadOnly)
+	float Acceleration = 0.0f;
+
+	UPROPERTY(BlueprintReadOnly)
 	bool bIsCrouched = false;
 };

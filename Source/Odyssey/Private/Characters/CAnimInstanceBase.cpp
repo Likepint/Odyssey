@@ -1,6 +1,7 @@
 #include "Characters/CAnimInstanceBase.h"
 #include "Global.h"
 #include "Characters/CCharacterBase.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 void UCAnimInstanceBase::NativeBeginPlay()
 {
@@ -15,5 +16,9 @@ void UCAnimInstanceBase::NativeUpdateAnimation(float DeltaSeconds)
 
 	CheckNull(OwnerCharacter);
 
+	Speed = OwnerCharacter->GetVelocity().Size();
+
+	Acceleration = OwnerCharacter->GetCharacterMovement()->GetCurrentAcceleration().Length();
+	
 	bIsCrouched = OwnerCharacter->bIsCrouched;
 }

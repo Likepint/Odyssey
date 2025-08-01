@@ -13,4 +13,11 @@ public:
 	virtual void NativeBeginPlay() override;
 	
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
+
+protected:
+	UPROPERTY(BlueprintReadOnly)
+	float SpeedAtStop = 0.0f;
+
+	UPROPERTY(BlueprintReadOnly)
+	bool bWantsToStop = false;
 };

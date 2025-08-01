@@ -1,6 +1,8 @@
 #include "Components/CMovementComponent.h"
+#include "Global.h"
 #include "Characters/CCharacterBase.h"
 #include "EnhancedInputComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 UCMovementComponent::UCMovementComponent()
 {
@@ -25,6 +27,26 @@ void UCMovementComponent::SetupPlayerInput(UEnhancedInputComponent* PlayerInputC
 
 	if (IA_Crouch)
 		PlayerInputComponent->BindAction(IA_Crouch, ETriggerEvent::Started, this, &UCMovementComponent::OnCrouch);
+}
+
+void UCMovementComponent::CheckStopSpeed()
+{
+	CheckNull(OwnerCharacter);
+	CheckNull(OwnerCharacter->GetCharacterMovement());
+
+	float acceleration = OwnerCharacter->GetCharacterMovement()->GetCurrentAcceleration().Length();
+	if (FMath::IsNearlyZero(acceleration))
+	{
+		if (!bWantsToStop)
+		{
+			SpeedAtStop = OwnerCharacter->GetVelocity().Size();
+			bWantsToStop = true;
+		}
+	}
+	else
+	{
+		bWantsToStop = false;
+	}
 }
 
 void UCMovementComponent::BeginPlay()
