@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
 #include "Enums/ECharacterType.h"
-#include "CharacterData.generated.h"
+#include "CCharacterAsset.generated.h"
 
 USTRUCT(BlueprintType)
 struct FCharacterAppearance
@@ -20,7 +20,7 @@ public:
 };
 
 UCLASS()
-class ODYSSEY_API UCharacterData : public UDataAsset
+class ODYSSEY_API UCCharacterAsset : public UDataAsset
 {
 	GENERATED_BODY()
 	

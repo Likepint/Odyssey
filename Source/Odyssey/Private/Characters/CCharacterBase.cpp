@@ -3,6 +3,8 @@
 ACCharacterBase::ACCharacterBase()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
+	Init();
 }
 
 void ACCharacterBase::Tick(float DeltaTime)

@@ -17,3 +17,8 @@ void UCComponentBase::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
+
+void UCComponentBase::SetupPlayerInput(UEnhancedInputComponent* PlayerInputComponent)
+{
+	check(PlayerInputComponent);
+}

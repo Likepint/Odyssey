@@ -15,6 +15,15 @@ public class Odyssey : ModuleRules
 			"Engine",
 			"InputCore",
 			"EnhancedInput",
+			
+			"AIModule",
+			"GameplayTasks",
+			"NavigationSystem",
+			
+			"GameplayAbilities",
+			"GameplayTags",
+			"GameplayTasks",
+			
 			"Niagara"
 		});
 
