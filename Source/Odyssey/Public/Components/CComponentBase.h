@@ -17,6 +17,8 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
+	virtual void SetupPlayerInput(UEnhancedInputComponent* PlayerInputComponent);
+	
 protected:
 	UPROPERTY()
 	TObjectPtr<ACCharacterBase> OwnerCharacter;

@@ -20,7 +20,11 @@ public:
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
 	// 캐릭터가 호출할 입력 바인딩 함수
-	void SetupPlayerInput(UEnhancedInputComponent* PlayerInputComponent);
+	virtual void SetupPlayerInput(UEnhancedInputComponent* PlayerInputComponent) override;
+
+	void Move() { bCanMove = true; }
+	void Stop() { bCanMove = false; }
+	bool CanMove() const { return bCanMove; }
 
 	bool WantsToStop() const { return bWantsToStop; }
 	float GetSpeedAtStop() const { return SpeedAtStop; }
@@ -40,6 +44,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> IA_Crouch;
 
+	bool bCanMove = true;
+	
 	bool bWantsToStop = false;
 	float SpeedAtStop = 0.0f;
 

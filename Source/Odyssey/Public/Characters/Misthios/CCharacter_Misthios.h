@@ -5,7 +5,7 @@
 #include "Enums/ECharacterType.h"
 #include "CCharacter_Misthios.generated.h"
 
-class UCharacterData;
+class UCCharacterAsset;
 
 class UInputMappingContext;
 
@@ -38,7 +38,7 @@ public:
 protected:
 	// 에디터에서 캐릭터 외형 데이터 애셋을 지정할 수 있도록 프로퍼티 추가
 	UPROPERTY(EditAnywhere, Category = "CharacterData")
-	UCharacterData* CharacterDataAsset;
+	UCCharacterAsset* CharacterDataAsset;
 
 	// 에디터에서 알렉시오스/카산드라를 선택할 수 있는 옵션
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "CharacterType", meta = (AllowPrivateAccess = "true"))

@@ -17,8 +17,8 @@ void UCMovementComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 
 void UCMovementComponent::SetupPlayerInput(UEnhancedInputComponent* PlayerInputComponent)
 {
-	check(PlayerInputComponent);
-
+	Super::SetupPlayerInput(PlayerInputComponent);
+	
 	if (IA_Movement)
 		PlayerInputComponent->BindAction(IA_Movement, ETriggerEvent::Triggered, this, &UCMovementComponent::OnMovement);
 
