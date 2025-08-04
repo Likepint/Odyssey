@@ -4,7 +4,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CMovementComponent.h"
-#include "Datas/CharacterData.h"
+#include "Datas/CCharacterAsset.h"
 #include "Characters/CMisthiosController.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
@@ -88,15 +88,13 @@ void ACCharacter_Misthios::Init()
 	}
 	
 	{ // Actor Components
-<<<<<<< Updated upstream
 		CHelpers::CreateActorComponent<UCMovementComponent>(this, MovementComponent, TEXT("CMovementComponent"));
-=======
+		
 		CHelpers::CreateActorComponent<UAbilitySystemComponent>(this, AbilitySystemComponent, TEXT("AbilitySystemComponent"));
 		
 		CHelpers::CreateActorComponent<UCMovementComponent>(this, MovementComponent, TEXT("MovementComponent"));
 		
 		CHelpers::CreateActorComponent<UCWeaponComponent>(this, WeaponComponent, TEXT("WeaponComponent"));
->>>>>>> Stashed changes
 	}
 }
 
