@@ -4,10 +4,13 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CMovementComponent.h"
-#include "Datas/CCharacterAsset.h"
+#include "Datas/CharacterData.h"
 #include "Characters/CMisthiosController.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Components/CWeaponComponent.h"
+#include "Games/CMainPS.h"
+#include "AbilitySystemComponent.h"
 
 ACCharacter_Misthios::ACCharacter_Misthios()
 {
@@ -45,12 +48,17 @@ void ACCharacter_Misthios::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 	{
 		// MovementComponent에 입력 설정 위임
 		MovementComponent->SetupPlayerInput(enhancedInputComponent);
+
+		// WeaponComponent에 입력 설정 위임
+		WeaponComponent->SetupPlayerInput(enhancedInputComponent);
 	}
 }
 
 void ACCharacter_Misthios::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
+	
+	InitAbilityActorInfo();
 	
 	if (ACMisthiosController* controller = Cast<ACMisthiosController>(NewController))
 	{
@@ -80,11 +88,44 @@ void ACCharacter_Misthios::Init()
 	}
 	
 	{ // Actor Components
+<<<<<<< Updated upstream
+		CHelpers::CreateActorComponent<UCMovementComponent>(this, MovementComponent, TEXT("CMovementComponent"));
+=======
+		CHelpers::CreateActorComponent<UAbilitySystemComponent>(this, AbilitySystemComponent, TEXT("AbilitySystemComponent"));
+		
 		CHelpers::CreateActorComponent<UCMovementComponent>(this, MovementComponent, TEXT("MovementComponent"));
+		
+		CHelpers::CreateActorComponent<UCWeaponComponent>(this, WeaponComponent, TEXT("WeaponComponent"));
+>>>>>>> Stashed changes
 	}
 }
 
 void ACCharacter_Misthios::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void ACCharacter_Misthios::InitAbilityActorInfo()
+{
+	// PlayerState 로드
+	ACMainPS* PS = GetPlayerState<ACMainPS>();
+	if (PS)
+	{
+		// PlayerState로부터 ASC와 AttributeSet 포인터를 가져와 멤버 변수에 저장
+		AbilitySystemComponent = PS->GetAbilitySystemComponent();
+		AttributeSet = PS->GetAttributeSet();
+	
+		// ASC가 이 캐릭터를 '아바타'로 인식하도록 초기화
+		if (AbilitySystemComponent)
+		{
+			AbilitySystemComponent->InitAbilityActorInfo(PS, this);
+		}
+	}
+}
+
+void ACCharacter_Misthios::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+	
+	InitAbilityActorInfo();
 }
