@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
+#include "Components/CWeaponComponent.h"
 #include "CAnimInstanceBase.generated.h"
 
 class ACCharacterBase;
@@ -28,4 +29,12 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly)
 	bool bIsCrouched = false;
+
+	// 애님 그래프에서 사용할 무기 타입 변수
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Animation")
+	EWeaponType WeaponType = EWeaponType::Max;
+
+private:
+	UFUNCTION()
+	void OnWeaponTypeChanged(EWeaponType InNewType);
 };

@@ -12,7 +12,11 @@ class UInputMappingContext;
 class USpringArmComponent;
 class UCameraComponent;
 
+class UAbilitySystemComponent;
+class UCAttributeSet;
+
 class UCMovementComponent;
+class UCWeaponComponent;
 
 UCLASS(Blueprintable)
 class ODYSSEY_API ACCharacter_Misthios : public ACCharacterBase
@@ -39,20 +43,33 @@ protected:
 	// 에디터에서 알렉시오스/카산드라를 선택할 수 있는 옵션
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "CharacterType", meta = (AllowPrivateAccess = "true"))
 	ECharacterType CharacterType = ECharacterType::Alexios;
+	
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<UInputMappingContext> IMC_Misthios;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<USpringArmComponent> SpringArmComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UCameraComponent> CameraComponent;
-
-	UPROPERTY(EditAnywhere, Category = "Input")
-	TObjectPtr<UInputMappingContext> IMC_Misthios;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GameplayAbilitySystem")
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GameplayAbilitySystem")
+	TObjectPtr<UCAttributeSet> AttributeSet;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UCMovementComponent> MovementComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	TObjectPtr<UCWeaponComponent> WeaponComponent;
 	
 	virtual void Init() override;
 	
 	virtual void BeginPlay() override;
+
+	void InitAbilityActorInfo();
+	
+	virtual void OnRep_PlayerState() override;
 };
